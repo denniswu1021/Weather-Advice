@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.org/dmn/_31DB63B2-33AD-4326-8EB7-4229644EB09D" id="_28A03BF4-9C33-443E-8603-087A77B4CC25" name="DMN_01E7419E-1E5F-49D1-8879-5D890638B0B7">
   <itemDefinition id="_BF9AFB53-3B6C-4B4E-9A80-5E4ACF8F18D6" name="weather" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
-    <itemComponent id="_2813E4AD-A153-4DEC-A900-80B2D5F3D1CC" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_18D14234-079C-4BF1-89EE-A192C11E3275" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
       <typeRef>temperature</typeRef>
     </itemComponent>
-    <itemComponent id="_74085D21-4F39-4B99-82C8-C36F1D986200" name="rainForecast" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_3B6D16E3-BB9E-4333-A7E1-C44A4ECEDF17" name="rainForecast" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
       <typeRef>number</typeRef>
     </itemComponent>
   </itemDefinition>
   <itemDefinition id="_7F34F170-729B-4C1A-9FE5-8DC7EC8648A8" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
     <typeRef>string</typeRef>
-    <typeConstraint id="_7DC8DEEB-D275-4F21-98B6-F3B8BF8B712C" kie:constraintType="expression">
-      <text>&quot;cold&quot;,&quot;warm&quot;,&quot;hot&quot;</text>
+    <typeConstraint id="_AEDAA452-FC42-47F4-85BA-E7DCA12F5766" kie:constraintType="expression">
+      <text>&quot;cold&quot;, &quot;warm&quot;, &quot;hot&quot;</text>
     </typeConstraint>
   </itemDefinition>
   <inputData name="Name" id="_FC6AD657-EA1E-445E-8CB8-DEDCCD066ADF">
@@ -29,8 +29,8 @@
       <text>if Name = &quot;&quot; then &quot;Sorry, we don&apos;t have enough information to provide a response.&quot; else &quot;Hello &quot;+Name+&quot;! &quot;+Weather-Advice</text>
     </literalExpression>
   </decision>
-  <inputData name="Rain-Forecast" id="_393AABE0-6AAE-4A9E-B5FB-F9F7C6E4D057">
-    <variable name="Rain-Forecast" id="_82CD16E2-4A75-464B-81AC-A2F0FEA0C48E" typeRef="number" />
+  <inputData name="Weather" id="_393AABE0-6AAE-4A9E-B5FB-F9F7C6E4D057">
+    <variable name="Weather" id="_82CD16E2-4A75-464B-81AC-A2F0FEA0C48E" typeRef="weather" />
   </inputData>
   <decision name="Weather-Advice" id="_D5D46763-A2B1-40FE-8DDC-C06D0671510D">
     <variable id="_4A5A5D5D-36FD-46D1-AAB1-DB42F76EC1EC" typeRef="string" name="Weather-Advice" />
@@ -40,7 +40,12 @@
     <decisionTable id="_545D1EB0-C7F8-40BB-92D2-8F88DC6964FF" typeRef="string" hitPolicy="UNIQUE" label="Weather-Advice">
       <input id="_30C6DE06-E1E6-4591-977F-BF6747ACA743">
         <inputExpression id="_5C974BAB-11AD-487A-9ED9-3C9583553416" typeRef="number">
-          <text>Rain-Forecast</text>
+          <text>Weather.rainForecast</text>
+        </inputExpression>
+      </input>
+      <input id="_66DD3D48-45A5-4909-A593-4E4F47D6EEF9">
+        <inputExpression id="_B2F6FE92-2E37-4014-8ADF-70A635C1B1AC" typeRef="string">
+          <text>Weather.temperature</text>
         </inputExpression>
       </input>
       <output id="_857C6047-8D73-44CF-A436-8FE538FBCAA6" name="Output-1" />
@@ -49,8 +54,11 @@
         <inputEntry id="_CAE75254-0F3A-4E21-A549-DF5A7590284A">
           <text>[0..20)</text>
         </inputEntry>
+        <inputEntry id="_56B8AF30-8741-4E24-8EB5-AC5B22E4599E">
+          <text>&quot;cold&quot;</text>
+        </inputEntry>
         <outputEntry id="_5AC66FD4-9455-42DB-8475-6EE64BE85954">
-          <text>&quot;Nice data. Enjoy the weather!&quot;</text>
+          <text>&quot;Cold day. Take a coat.&quot;</text>
         </outputEntry>
         <annotationEntry>
           <text>// Your annotations here</text>
@@ -59,6 +67,9 @@
       <rule id="_726573D0-2960-491C-BD7B-B89C6F7BFF21">
         <inputEntry id="_C89512E9-E3F0-4D43-96F4-9642D8ABD020">
           <text>[20..80)</text>
+        </inputEntry>
+        <inputEntry id="_DD3EC6A0-4515-4B99-9535-3EF44DFF0BBC">
+          <text>-</text>
         </inputEntry>
         <outputEntry id="_58D43CC6-F281-47F2-AB94-836B360A0C9A">
           <text>&quot;Risk of rain. Might need an umbrealla.&quot;</text>
@@ -70,6 +81,9 @@
       <rule id="_4C8C0D14-E2D8-405C-815F-B7CA91365046">
         <inputEntry id="_0E9613F2-67EF-4287-BD1B-0879B919D184">
           <text>[80..100]</text>
+        </inputEntry>
+        <inputEntry id="_4B7B8DB6-4C1B-43C4-B368-ADEE90D1C83D">
+          <text>-</text>
         </inputEntry>
         <outputEntry id="_75AB1DC0-1C18-4F00-9248-05CB3094B0E2">
           <text>&quot;Rainy data. Take an umbrella.&quot;</text>
@@ -89,7 +103,8 @@
           </kie:ComponentWidths>
           <kie:ComponentWidths dmnElementRef="_545D1EB0-C7F8-40BB-92D2-8F88DC6964FF">
             <kie:width>60</kie:width>
-            <kie:width>118</kie:width>
+            <kie:width>185</kie:width>
+            <kie:width>261</kie:width>
             <kie:width>680</kie:width>
             <kie:width>240</kie:width>
           </kie:ComponentWidths>
