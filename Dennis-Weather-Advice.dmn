@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.org/dmn/_31DB63B2-33AD-4326-8EB7-4229644EB09D" id="_28A03BF4-9C33-443E-8603-087A77B4CC25" name="DMN_01E7419E-1E5F-49D1-8879-5D890638B0B7">
+  <inputData name="Name" id="_FC6AD657-EA1E-445E-8CB8-DEDCCD066ADF">
+    <variable name="Name" id="_D329C383-3861-4283-B05A-4C7CAEFC7492" typeRef="string" />
+  </inputData>
+  <decision name="Daily-Advice" id="_DD842DEB-AF1D-420F-8285-63F9BAEE1C5E">
+    <variable id="_49DE6CAE-F781-4A36-8FAF-CE6417EEDC99" typeRef="string" name="Daily-Advice" />
+    <informationRequirement id="_31F5547F-BAE1-4E75-8EA4-BA7CA27CECA1">
+      <requiredInput href="#_FC6AD657-EA1E-445E-8CB8-DEDCCD066ADF" />
+    </informationRequirement>
+    <literalExpression id="_BE7C7214-004E-4D2D-AFC7-C4EF7410E33D" label="Daily-Advice">
+      <text>if Name = &quot;&quot; then &quot;Sorry, we don&apos;t have enough information to provide a response.&quot; else &quot;Hello &quot;+Name+&quot;! &quot;</text>
+    </literalExpression>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_7683849A-253E-4542-9976-2D537FB16A24" name="Default DRD" useAlternativeInputDataShape="false">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_BE7C7214-004E-4D2D-AFC7-C4EF7410E33D">
+            <kie:width>863</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="_ADAC7BFE-C78A-4023-B264-FD09ACF99BA1" dmnElementRef="_FC6AD657-EA1E-445E-8CB8-DEDCCD066ADF" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="320" y="260" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_B48D7731-CF46-4954-92C7-AA8384B2DCF7" dmnElementRef="_DD842DEB-AF1D-420F-8285-63F9BAEE1C5E" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="320" y="40" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="_8E735BCD-FC45-4102-9075-0F19B65ECA83-AUTO-TARGET" dmnElementRef="_31F5547F-BAE1-4E75-8EA4-BA7CA27CECA1" sourceElement="_ADAC7BFE-C78A-4023-B264-FD09ACF99BA1" targetElement="_B48D7731-CF46-4954-92C7-AA8384B2DCF7">
+        <di:waypoint x="400" y="300" />
+        <di:waypoint x="400" y="80" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
