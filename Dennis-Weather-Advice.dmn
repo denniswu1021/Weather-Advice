@@ -40,12 +40,12 @@
     <decisionTable id="_545D1EB0-C7F8-40BB-92D2-8F88DC6964FF" typeRef="string" hitPolicy="UNIQUE" label="Weather-Advice">
       <input id="_30C6DE06-E1E6-4591-977F-BF6747ACA743">
         <inputExpression id="_5C974BAB-11AD-487A-9ED9-3C9583553416" typeRef="number">
-          <text>Weather.rainForecast</text>
+          <text>weather.rainForecast</text>
         </inputExpression>
       </input>
       <input id="_66DD3D48-45A5-4909-A593-4E4F47D6EEF9">
         <inputExpression id="_B2F6FE92-2E37-4014-8ADF-70A635C1B1AC" typeRef="string">
-          <text>Weather.temperature</text>
+          <text>weather.temperature</text>
         </inputExpression>
       </input>
       <output id="_857C6047-8D73-44CF-A436-8FE538FBCAA6" name="Output-1" />
