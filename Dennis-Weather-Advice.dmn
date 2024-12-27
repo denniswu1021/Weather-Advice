@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.org/dmn/_31DB63B2-33AD-4326-8EB7-4229644EB09D" id="_28A03BF4-9C33-443E-8603-087A77B4CC25" name="DMN_01E7419E-1E5F-49D1-8879-5D890638B0B7">
-  <itemDefinition id="_BF9AFB53-3B6C-4B4E-9A80-5E4ACF8F18D6" name="weather" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
-    <itemComponent id="_18D14234-079C-4BF1-89EE-A192C11E3275" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+  <itemDefinition id="_F83A8D50-53D2-48B0-B401-39A9BC19F404" name="weather" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_D1F10C98-7958-4AD6-8394-23EF265421D3" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
       <typeRef>temperature</typeRef>
     </itemComponent>
-    <itemComponent id="_3B6D16E3-BB9E-4333-A7E1-C44A4ECEDF17" name="rainForecast" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+    <itemComponent id="_6BB21F58-F3E7-4DC1-80FA-53513ABA3DCC" name="rainForecast" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
       <typeRef>number</typeRef>
     </itemComponent>
+    <itemComponent id="_1071C16F-2788-444D-84A1-12FE3B99F92B" name="stormAlert" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+      <typeRef>boolean</typeRef>
+    </itemComponent>
   </itemDefinition>
-  <itemDefinition id="_7F34F170-729B-4C1A-9FE5-8DC7EC8648A8" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
+  <itemDefinition id="_E5730B13-8C6E-486D-B5D7-FC7F72E8E497" name="temperature" isCollection="false" typeLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/">
     <typeRef>string</typeRef>
-    <typeConstraint id="_AEDAA452-FC42-47F4-85BA-E7DCA12F5766" kie:constraintType="expression">
+    <typeConstraint id="_32BE8704-563F-4934-947A-DD301ECA90EF" kie:constraintType="expression">
       <text>&quot;cold&quot;, &quot;warm&quot;, &quot;hot&quot;</text>
     </typeConstraint>
   </itemDefinition>
@@ -29,33 +32,61 @@
       <text>if Name = &quot;&quot; then &quot;Sorry, we don&apos;t have enough information to provide a response.&quot; else &quot;Hello &quot;+Name+&quot;! &quot;+Weather-Advice</text>
     </literalExpression>
   </decision>
-  <inputData name="Weather" id="_393AABE0-6AAE-4A9E-B5FB-F9F7C6E4D057">
-    <variable name="Weather" id="_82CD16E2-4A75-464B-81AC-A2F0FEA0C48E" typeRef="weather" />
+  <inputData name="weather" id="_393AABE0-6AAE-4A9E-B5FB-F9F7C6E4D057">
+    <variable name="weather" id="_82CD16E2-4A75-464B-81AC-A2F0FEA0C48E" typeRef="weather" />
   </inputData>
   <decision name="Weather-Advice" id="_D5D46763-A2B1-40FE-8DDC-C06D0671510D">
     <variable id="_4A5A5D5D-36FD-46D1-AAB1-DB42F76EC1EC" typeRef="string" name="Weather-Advice" />
     <informationRequirement id="_EBDBF86D-6351-4450-B4AE-E5F45DA42303">
       <requiredInput href="#_393AABE0-6AAE-4A9E-B5FB-F9F7C6E4D057" />
     </informationRequirement>
-    <decisionTable id="_545D1EB0-C7F8-40BB-92D2-8F88DC6964FF" typeRef="string" hitPolicy="UNIQUE" label="Weather-Advice">
+    <decisionTable id="_545D1EB0-C7F8-40BB-92D2-8F88DC6964FF" typeRef="string" hitPolicy="FIRST" label="Weather-Advice">
       <input id="_30C6DE06-E1E6-4591-977F-BF6747ACA743">
         <inputExpression id="_5C974BAB-11AD-487A-9ED9-3C9583553416" typeRef="number">
           <text>weather.rainForecast</text>
         </inputExpression>
       </input>
-      <input id="_66DD3D48-45A5-4909-A593-4E4F47D6EEF9">
-        <inputExpression id="_B2F6FE92-2E37-4014-8ADF-70A635C1B1AC" typeRef="string">
+      <input id="_04EA3C43-E081-46EC-B529-7A35AE4DD4B7">
+        <inputExpression id="_63F69991-C863-4FE7-9937-7F6283ABE4C8" typeRef="string">
           <text>weather.temperature</text>
+        </inputExpression>
+        <inputValues id="_9508E265-277D-4946-B664-D71FAE934E18" typeRef="string">
+          <text></text>
+        </inputValues>
+      </input>
+      <input id="_EFEC8F43-F6C7-499B-AB00-9A5B842A2219">
+        <inputExpression id="_BB772885-2DBB-493D-AD31-2C9B4AF5F873" typeRef="boolean">
+          <text>weather.stormAlert</text>
         </inputExpression>
       </input>
       <output id="_857C6047-8D73-44CF-A436-8FE538FBCAA6" name="Output-1" />
       <annotation name="Annotations" />
+      <rule id="_9D406E83-3C1A-49BB-BEE1-6C892254F307">
+        <inputEntry id="_94683CEA-9E66-4DA9-8FAC-41EB15CDA028">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="_323DC7E2-A85A-4A5F-B485-1467F3268BDE">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="_01B86AAB-8A97-41E3-8F32-A6E5AF5A3CAC">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="_1A584DD2-8F1D-4851-ADDF-C86230081ACE">
+          <text>&quot;Stay home. There is a storm alert.&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
       <rule id="_92398AE2-85FB-466A-97FB-294B5EC0A529">
         <inputEntry id="_CAE75254-0F3A-4E21-A549-DF5A7590284A">
           <text>[0..20)</text>
         </inputEntry>
-        <inputEntry id="_56B8AF30-8741-4E24-8EB5-AC5B22E4599E">
+        <inputEntry id="_A113FA0B-763A-41F7-B91E-C558E74CB7AE">
           <text>&quot;cold&quot;</text>
+        </inputEntry>
+        <inputEntry id="_4CE96F86-0987-4F2E-9CBF-9CAEA4490021">
+          <text>-</text>
         </inputEntry>
         <outputEntry id="_5AC66FD4-9455-42DB-8475-6EE64BE85954">
           <text>&quot;Cold day. Take a coat.&quot;</text>
@@ -68,7 +99,10 @@
         <inputEntry id="_C89512E9-E3F0-4D43-96F4-9642D8ABD020">
           <text>[20..80)</text>
         </inputEntry>
-        <inputEntry id="_DD3EC6A0-4515-4B99-9535-3EF44DFF0BBC">
+        <inputEntry id="_5BFF6C3F-7AC1-44FC-AC61-529A10931AFA">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="_E659C5F2-2D38-4B6B-B506-7FBCD9EE2D10">
           <text>-</text>
         </inputEntry>
         <outputEntry id="_58D43CC6-F281-47F2-AB94-836B360A0C9A">
@@ -82,7 +116,10 @@
         <inputEntry id="_0E9613F2-67EF-4287-BD1B-0879B919D184">
           <text>[80..100]</text>
         </inputEntry>
-        <inputEntry id="_4B7B8DB6-4C1B-43C4-B368-ADEE90D1C83D">
+        <inputEntry id="_DAAA90BB-7EA3-4BFB-B613-6FF7D659D3FB">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="_D7F15843-DD8B-4C00-9BFE-0626FD92F851">
           <text>-</text>
         </inputEntry>
         <outputEntry id="_75AB1DC0-1C18-4F00-9248-05CB3094B0E2">
@@ -104,7 +141,8 @@
           <kie:ComponentWidths dmnElementRef="_545D1EB0-C7F8-40BB-92D2-8F88DC6964FF">
             <kie:width>60</kie:width>
             <kie:width>185</kie:width>
-            <kie:width>261</kie:width>
+            <kie:width>281</kie:width>
+            <kie:width>232</kie:width>
             <kie:width>680</kie:width>
             <kie:width>240</kie:width>
           </kie:ComponentWidths>
